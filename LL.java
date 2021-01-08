@@ -7,7 +7,12 @@ public class LL {
         City east;      //next/right
 
         //Creates list with 1 city.
+        /***** I don't think this creates a list (since its in the sub-class).
+         * while its true that a single node is a list in general,
+         * since this class is not accessable outside, and there is a LL class it is not in itself externally a linked list. 
+         *****/
         public City(String name, int westDist, int eastDist){
+            /* Since these are distances, really they are unsigned, but being stored as an int means you need to check if its positive. */
             this.name = name;
             this.westDist = westDist;
             this.eastDist = eastDist;
@@ -16,6 +21,10 @@ public class LL {
     City head = null;
     City tail = null;
 
+    /* It would be good if there were more comments so I know the details. 
+    * I am assuming this method appends at the end of the list, sort of for initialization purposes. 
+    * this is okay, but I think it is not needed in general.
+    */
     public void addCity(String name, int westDist){
         City newCity = new City(name,westDist,0);
 
@@ -36,6 +45,9 @@ public class LL {
             newCity.eastDist = 0;   //distance east is 0, as the tail is the furthest east
         }
     }
+    /**
+     * Why only east? 
+     */
     public void insertCity(String target, String name, int eastFromTar){
         //method to insert city in the middle of the map, after a given City (aka target)
         //inputs are target City's name, and distance of new city from Target city (east)
@@ -45,11 +57,12 @@ public class LL {
         while(current != null) {
             if(current.name.equals(target)) {
                 if (eastFromTar > current.eastDist) {
+                    /* This should call the append method. */
                     System.out.println("This town couldn't fit into the middle of this city and the next");
                     //put in code to calculate where this node would fit into the map, add accordingly
                     return;
                 }
-                if (eastFromTar < 0) {
+                if (eastFromTar < 0) { /* Good! */
                     System.out.println("You cannot have negative distances");
                     return;
                 }
@@ -143,6 +156,11 @@ public class LL {
     public void findDistance(String start, String end){
         //given the names of two cities, finds the distance between the two.
         //order of city names must be East to West
+
+        /* how can you overcome this limitation? 
+            if the distances are reflective, (i.e. A to B is the same as B to A), 
+            can you determine if nodes are out of order and re-call the method? 
+        */
         City current = head;
         int totalMiles = 0;
         while(current != null){
