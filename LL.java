@@ -1,3 +1,8 @@
+//create method to add a city using distance west from desired city, instead of just east
+//add comment details to addCity
+//change the way distance is handled. After being placed, the distance stored in the node should represent the distance from the parent node.
+//accomplish this by subtracting the parent node's distance each step along the way. Do opposite when reporting distance
+
 public class LL {
     class City{
         String name;    //name of city
